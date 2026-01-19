@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.widget.TabLayout
             android:id="@+id/clone_app_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
