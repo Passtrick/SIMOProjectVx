@@ -1,0 +1,9 @@
+modules = ["c-clang", "python-3.11", "c-clang14", "cpp-clang14"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["binutils", "capstone", "clang", "cmake", "coreutils", "curl", "gcc", "keystone", "libxml2", "llvm", "llvmPackages.libcxx", "radare2", "unzip", "android-tools", "gradle-completion", "gradle_8-unwrapped", "gradle-unwrapped", "gradle"]
+
+[workflows]
