@@ -32,7 +32,6 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     lint {
-        warning 'NewApi','OnClick'
         checkReleaseBuilds false
         abortOnError false
     }
@@ -41,13 +40,11 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    // Core dependencies from Appodeal Mirror (Official JCenter mirror)
-    api("me.weishu.exposed:exposed-core:0.8.1") {
-        exclude group: 'me.weishu', module: 'free_reflection'
-        exclude group: 'me.weishu', module: 'epic'
-        exclude group: 'me.weishu.exposed', module: 'exposed-xposedapi'
-    }
-    implementation "me.weishu:free_reflection:3.0.1"
-    implementation "me.weishu:epic:0.11.2"
-    implementation "me.weishu.exposed:exposed-xposedapi:0.4.6"
+    // Estos módulos SI existen en el espejo de Appodeal. 
+    // El fallo anterior fue porque JitPack intentaba compilarlos y fallaba la autenticación.
+    // Al usar el espejo de binarios de Appodeal, GitHub los descargará directamente.
+    api 'me.weishu.exposed:exposed-core:0.8.1'
+    implementation 'me.weishu:free_reflection:3.0.1'
+    implementation 'me.weishu:epic:0.11.2'
+    implementation 'me.weishu.exposed:exposed-xposedapi:0.4.6'
 }
