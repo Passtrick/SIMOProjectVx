@@ -8,11 +8,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
-        externalNativeBuild {
-            ndkBuild {
-                abiFilters "arm64-v8a", "x86_64"
-            }
-        }
     }
     
     externalNativeBuild {
@@ -32,19 +27,12 @@ android {
     }
 }
 
-repositories {
-    maven { url "https://artifactory.appodeal.com/appodeal-public/" }
-    maven { url "https://jitpack.io" }
-    google()
-    mavenCentral()
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    // Use fixed versions and direct mirrors
-    api 'me.weishu.exposed:exposed-core:0.8.1'
-    implementation 'me.weishu:free_reflection:3.0.1'
-    implementation 'me.weishu:epic:0.11.1'
-    implementation 'me.weishu.exposed:exposed-xposedapi:0.4.6'
+    // Core dependencies using JitPack alternatives (com.github.android-hacker)
+    api 'com.github.android-hacker:exposed:0.8.1'
+    implementation 'com.github.tiann:free_reflection:3.0.1'
+    implementation 'com.github.tiann:epic:0.11.2'
+    implementation 'com.github.tiann:exposed-xposedapi:0.4.6'
 }

@@ -1,24 +1,7 @@
 apply plugin: 'com.android.application'
 
-Properties properties = new Properties()
-def localProp = file(project.rootProject.file('local.properties'))
-if (localProp.exists()) {
-    properties.load(localProp.newDataInputStream())
-}
-def keyFile = file(properties.getProperty("keystore.path") ?: "/tmp/does_not_exist")
-
 android {
     namespace 'io.va.exposed64'
-    
-    signingConfigs {
-        config {
-            keyAlias properties.getProperty("keystore.alias")
-            keyPassword properties.getProperty("keystore.pwd")
-            storeFile keyFile
-            storePassword properties.getProperty("keystore.alias_pwd")
-        }
-    }
-
     compileSdkVersion 33
     buildToolsVersion '33.0.0'
     
@@ -28,30 +11,8 @@ android {
         targetSdkVersion 33
         versionCode 220
         versionName "0.22.0"
-        multiDexEnabled false
         ndk {
             abiFilters "arm64-v8a", "x86_64"
-        }
-    }
-    
-    flavorDimensions 'main'
-    
-    productFlavors {
-        aosp {
-            dimension 'main'
-            if (keyFile.exists()) {
-                signingConfig signingConfigs.config
-            }
-        }
-
-        fdroid {
-            dimension 'main'
-        }
-    }
-    
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
         }
     }
     
@@ -66,11 +27,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    
-    lint {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 }
 
 dependencies {
@@ -78,23 +34,13 @@ dependencies {
     implementation project(':lib')
     implementation project(':launcher')
     
-    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'com.google.android.material:material:1.11.0'
     
-    implementation 'org.jdeferred:jdeferred-android-aar:1.2.4'
-    implementation 'com.jonathanfinerty.once:once:1.3.0'
-
-    def appCenterSdkVersion = '3.0.0'
-    aospImplementation("com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}")
-    aospImplementation("com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}")
-
+    // Updated 3rd party libraries
     implementation 'com.github.systembugtj:switchbutton:1.4.5'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
     implementation 'com.github.medyo:android-about-page:1.2.2'
-    implementation 'moe.feng:AlipayZeroSdk:1.1'
-
     implementation 'com.github.bumptech.glide:glide:4.15.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+    implementation 'com.jonathanfinerty.once:once:1.3.0'
 }
