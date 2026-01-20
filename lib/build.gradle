@@ -37,16 +37,24 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    google()
+    mavenCentral()
+    maven { url 'https://artifactory.appodeal.com/appodeal-public/' }
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    // Core dependencies from Appodeal Mirror (verified binaries)
-    api("me.weishu.exposed:exposed-core:0.8.1") {
-        exclude group: 'me.weishu', module: 'free_reflection'
-        exclude group: 'me.weishu', module: 'epic'
-        exclude group: 'me.weishu.exposed', module: 'exposed-xposedapi'
-    }
-    implementation "me.weishu:free_reflection:3.0.1"
-    implementation "me.weishu:epic:0.11.2"
-    implementation "me.weishu.exposed:exposed-xposedapi:0.4.6"
+    // Epic se carga localmente porque ya tenemos el binario verificado
+    implementation name: 'epic-0.11.2', ext: 'aar'
+    
+    // El resto se descargan desde el espejo de Appodeal (vía Gradle en GitHub)
+    api 'me.weishu.exposed:exposed-core:0.8.1'
+    implementation 'me.weishu:free_reflection:3.0.1'
+    implementation 'me.weishu.exposed:exposed-xposedapi:0.4.6'
 }
