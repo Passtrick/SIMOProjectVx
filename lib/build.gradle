@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-    namespace 'com.lody.virtual'
 
 android {
+    namespace 'com.lody.virtual'
     compileSdkVersion 33
     buildToolsVersion '33.0.0'
 
@@ -27,16 +27,16 @@ android {
             path file("src/main/jni/Android.mk")
         }
     }
-    lintOptions {
-        //IJobService need NewApi
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    lint {
         warning 'NewApi','OnClick'
         checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
         abortOnError false
     }
 }
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
