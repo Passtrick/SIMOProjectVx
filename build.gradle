@@ -17,6 +17,7 @@ allprojects {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://artifactory.appodeal.com/appodeal-public/" }
+        maven { url "https://jcenter.bintray.com/" }
     }
 }
 
