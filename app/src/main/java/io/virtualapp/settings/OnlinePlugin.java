@@ -3,7 +3,7 @@ package io.virtualapp.settings;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.SystemClock;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;

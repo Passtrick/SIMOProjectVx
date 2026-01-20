@@ -1,6 +1,6 @@
 package io.virtualapp.utils;
 
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * @author weishu

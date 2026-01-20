@@ -2,7 +2,7 @@ package io.virtualapp.abs.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 
