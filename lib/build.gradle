@@ -38,27 +38,16 @@ android {
     }
 }
 
-repositories {
-    google()
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://artifactory.appodeal.com/appodeal-public/' }
-}
-
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-    google()
-    mavenCentral()
-}
-
 dependencies {
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    // Core dependencies using local AARs
-    api name: 'exposed-core-0.8.1', ext: 'aar'
-    implementation name: 'free_reflection-3.0.1', ext: 'aar'
-    implementation name: 'epic-0.11.2', ext: 'aar'
-    implementation name: 'exposed-xposedapi-0.4.6', ext: 'aar'
+    // Core dependencies from Appodeal Mirror (Official JCenter mirror)
+    api("me.weishu.exposed:exposed-core:0.8.1") {
+        exclude group: 'me.weishu', module: 'free_reflection'
+        exclude group: 'me.weishu', module: 'epic'
+        exclude group: 'me.weishu.exposed', module: 'exposed-xposedapi'
+    }
+    implementation "me.weishu:free_reflection:3.0.1"
+    implementation "me.weishu:epic:0.11.2"
+    implementation "me.weishu.exposed:exposed-xposedapi:0.4.6"
 }
