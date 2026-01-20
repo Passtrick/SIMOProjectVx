@@ -49,13 +49,13 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    
+
     // Epic se carga localmente porque ya tenemos el binario verificado
     implementation name: 'epic-0.11.2', ext: 'aar'
-    
+
     // El resto se descargarán desde el espejo de Appodeal (vía Gradle en GitHub)
     // Usamos api para exposed-core porque es parte de la interfaz pública
     api 'me.weishu.exposed:exposed-core:0.8.1'
-    implementation implementation 'com.github.tiann:FreeReflection:3.1.0'
+    implementation 'com.github.tiann:FreeReflection:3.1.0'  // ← Corregido: solo un 'implementation'
     implementation 'me.weishu.exposed:exposed-xposedapi:0.4.6'
 }
