@@ -41,8 +41,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    // Core dependencies from JitPack
-    api("com.github.tiann:exposed-core:0.8.1") {
+    // Core dependencies from Appodeal Mirror (Official JCenter mirror)
+    api("me.weishu.exposed:exposed-core:0.8.1") {
         exclude group: 'me.weishu', module: 'free_reflection'
         exclude group: 'me.weishu', module: 'epic'
         exclude group: 'me.weishu.exposed', module: 'exposed-xposedapi'
