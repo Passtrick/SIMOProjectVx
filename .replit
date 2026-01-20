@@ -7,3 +7,24 @@ channel = "stable-25_05"
 packages = ["binutils", "capstone", "clang", "cmake", "coreutils", "curl", "gcc", "keystone", "libxml2", "llvm", "llvmPackages.libcxx", "radare2", "unzip", "android-tools", "gradle-completion", "gradle_8-unwrapped", "gradle-unwrapped", "gradle"]
 
 [workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Build Verification"
+
+[[workflows.workflow]]
+name = "Build Verification"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew help"
+
+[workflows.workflow.metadata]
+outputType = "console"
