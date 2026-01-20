@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+    namespace 'com.lody.virtual'
 
 android {
     compileSdkVersion 33
