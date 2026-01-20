@@ -45,12 +45,20 @@ repositories {
     maven { url 'https://artifactory.appodeal.com/appodeal-public/' }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    google()
+    mavenCentral()
+}
+
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     
-    // Usar dependencias estándar que SI están en Maven Central
-    api 'me.weishu.exposed:exposed-core:0.8.1'
-    implementation 'me.weishu:free_reflection:3.0.1'
-    implementation 'me.weishu:epic:0.11.2'
-    implementation 'me.weishu.exposed:exposed-xposedapi:0.4.6'
+    // Core dependencies using local AARs
+    api name: 'exposed-core-0.8.1', ext: 'aar'
+    implementation name: 'free_reflection-3.0.1', ext: 'aar'
+    implementation name: 'epic-0.11.2', ext: 'aar'
+    implementation name: 'exposed-xposedapi-0.4.6', ext: 'aar'
 }
