@@ -1,4 +1,4 @@
-﻿2026-01-20T03:18:42.8529075Z ##[group]Run ./gradlew assembleRelease --stacktrace
+﻿2026-01-20T05:16:05.4792890Z ##[group]Run ./gradlew assembleRelease --stacktrace
 ./gradlew assembleRelease --stacktrace
 shell: /usr/bin/bash -e {0}
 env:
@@ -44,9 +44,9 @@ Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/andro
 "Install Android SDK Platform 33 (revision: 3)" complete.
 "Install Android SDK Platform 33 (revision: 3)" finished.
 
-> Task :lib:preBuild UP-TO-DATE
 > Task :launcher:preBuild UP-TO-DATE
 > Task :launcher:preReleaseBuild UP-TO-DATE
+> Task :lib:preBuild UP-TO-DATE
 > Task :lib:preReleaseBuild UP-TO-DATE
 > Task :lib:configureNdkBuildRelease[arm64-v8a]
 > Task :launcher:mergeReleaseJniLibFolders
@@ -73,50 +73,62 @@ C/C++: } context;
 C/C++:   ^
 C/C++: 1 warning generated.
 
-> Task :lib:configureNdkBuildRelease[x86_64]
+> Task :lib:configureNdkBuildRelease[armeabi-v7a]
 
-> Task :lib:buildNdkBuildRelease[x86_64]
-C/C++: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/fake_dlfcn.cpp:37:9: warning: 'log_info' macro redefined [-Wmacro-redefined]
-C/C++: #define log_info(...)
-C/C++:         ^
-C/C++: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/fake_dlfcn.cpp:30:9: note: previous definition is here
-C/C++: #define log_info(fmt,args...) __android_log_print(ANDROID_LOG_INFO, TAG_NAME, (const char *) fmt, ##args)
-C/C++:         ^
-C/C++: 1 warning generated.
-
-> Task :lib:externalNativeBuildRelease
-> Task :lib:mergeReleaseJniLibFolders FROM-CACHE
-> Task :lib:mergeReleaseNativeLibs
-> Task :lib:copyReleaseJniLibsProjectOnly
-> Task :launcher:prepareReleaseArtProfile
-> Task :lib:prepareReleaseArtProfile
-> Task :lib:compileReleaseAidl FAILED
+> Task :lib:buildNdkBuildRelease[armeabi-v7a] FAILED
+C/C++: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/IOUniformer.cpp:131:23: error: use of undeclared identifier '__NR_newfstatat'
+C/C++:     int ret = syscall(__NR_newfstatat, dirfd, redirect_path, buf, flags);
+C/C++:                       ^
+C/C++: 1 error generated.
+C/C++: make: *** [/usr/local/lib/android/sdk/ndk/23.1.7779620/build/core/build-binary.mk:478: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj/local/armeabi-v7a/objs/va++/Foundation/IOUniformer.o] Error 1
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':lib:compileReleaseAidl'.
-> Could not resolve all files for configuration ':lib:releaseCompileClasspath'.
-   > Could not find me.weishu.exposed:exposed-core:0.8.1.
-     Required by:
-         project :lib
-   > Could not find me.weishu:free_reflection:3.0.1.
-     Required by:
-         project :lib
-   > Could not find me.weishu:epic:0.11.1.
-     Required by:
-         project :lib
-   > Could not find me.weishu.exposed:exposed-xposedapi:0.4.6.
-     Required by:
-         project :lib
+Execution failed for task ':lib:buildNdkBuildRelease[armeabi-v7a]'.
+> com.android.ide.common.process.ProcessException: Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/fb/Android.mk:fb: LOCAL_LDLIBS is always ignored for static libraries    
+  Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk:va++: non-system libraries in linker flags: -latomic    
+  Android NDK:     This is likely to result in incorrect builds. Try using LOCAL_STATIC_LIBRARIES    
+  Android NDK:     or LOCAL_SHARED_LIBRARIES instead to list the library dependencies of the    
+  Android NDK:     current module    
+  [armeabi-v7a] Compile++ thumb: va++ <= VAJni.cpp
+  [armeabi-v7a] Compile++ thumb: va++ <= IOUniformer.cpp
+  
+  C++ build system [build] failed while executing:
+      /usr/local/lib/android/sdk/ndk/23.1.7779620/ndk-build \
+        NDK_PROJECT_PATH=null \
+        APP_BUILD_SCRIPT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk \
+        NDK_APPLICATION_MK=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Application.mk \
+        APP_ABI=armeabi-v7a \
+        NDK_ALL_ABIS=armeabi-v7a \
+        NDK_DEBUG=0 \
+        APP_PLATFORM=android-21 \
+        NDK_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj \
+        NDK_LIBS_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/lib \
+        va++
+    from /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib
+  /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/IOUniformer.cpp:131:23: error: use of undeclared identifier '__NR_newfstatat'
+      int ret = syscall(__NR_newfstatat, dirfd, redirect_path, buf, flags);
+                        ^
+  1 error generated.
+  make: *** [/usr/local/lib/android/sdk/ndk/23.1.7779620/build/core/build-binary.mk:478: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj/local/armeabi-v7a/objs/va++/Foundation/IOUniformer.o] Error 1
 
 * Try:
 > Run with --info or --debug option to get more log output.
 > Run with --scan to get full insights.
 
 * Exception is:
-org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':lib:compileReleaseAidl'.
-	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:38)
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':lib:buildNdkBuildRelease[armeabi-v7a]'.
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:142)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:282)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:140)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:128)
+	at org.gradle.api.internal.tasks.execution.CleanupStaleOutputsExecuter.execute(CleanupStaleOutputsExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
@@ -136,60 +148,57 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':lib:com
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:288)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:462)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:379)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:115)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:135)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:120)
-	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
-	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$6(DefaultBuildLifecycleController.java:167)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:247)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$7(StateTransitionController.java:174)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:174)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:167)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:190)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:249)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:109)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:172)
-	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:47)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:191)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:49)
-Caused by: org.gradle.api.internal.artifacts.ivyservice.DefaultLenientConfiguration$ArtifactResolveException: Could not resolve all files for configuration ':lib:releaseCompileClasspath'.
-	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.mapFailure(DefaultConfiguration.java:1537)
-	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.access$3800(DefaultConfiguration.java:160)
-	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$DefaultResolutionHost.mapFailure(DefaultConfiguration.java:2189)
-	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$DefaultResolutionHost.rethrowFailure(DefaultConfiguration.java:2194)
-	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$ConfigurationFileCollection.visitContents(DefaultConfiguration.java:1505)
-	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:375)
-	at org.gradle.api.internal.file.CompositeFileCollection.lambda$visitContents$0(CompositeFileCollection.java:119)
-	at org.gradle.api.internal.file.collections.UnpackingVisitor.add(UnpackingVisitor.java:64)
-	at org.gradle.api.internal.file.collections.UnpackingVisitor.add(UnpackingVisitor.java:89)
-	at org.gradle.api.internal.file.DefaultFileCollectionFactory$ResolvingFileCollection.visitChildren(DefaultFileCollectionFactory.java:333)
-	at org.gradle.api.internal.file.CompositeFileCollection.visitContents(CompositeFileCollection.java:119)
-	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:375)
-	at org.gradle.api.internal.file.CompositeFileCollection.lambda$visitContents$0(CompositeFileCollection.java:119)
-	at org.gradle.api.internal.tasks.PropertyFileCollection.visitChildren(PropertyFileCollection.java:48)
-	at org.gradle.api.internal.file.CompositeFileCollection.visitContents(CompositeFileCollection.java:119)
-	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:375)
-	at org.gradle.internal.fingerprint.impl.DefaultFileCollectionSnapshotter.snapshot(DefaultFileCollectionSnapshotter.java:51)
-	at org.gradle.internal.execution.fingerprint.impl.DefaultInputFingerprinter$InputCollectingVisitor.visitInputFileProperty(DefaultInputFingerprinter.java:131)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.visitRegularInputs(TaskExecution.java:322)
-	at org.gradle.internal.execution.fingerprint.impl.DefaultInputFingerprinter.fingerprintInputProperties(DefaultInputFingerprinter.java:61)
-	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.captureExecutionStateWithOutputs(CaptureStateBeforeExecutionStep.java:193)
-	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.lambda$captureExecutionState$1(CaptureStateBeforeExecutionStep.java:141)
-	at org.gradle.internal.execution.steps.BuildOperationStep$1.call(BuildOperationStep.java:37)
+Caused by: org.gradle.internal.UncheckedException: com.android.ide.common.process.ProcessException: Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/fb/Android.mk:fb: LOCAL_LDLIBS is always ignored for static libraries    
+Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk:va++: non-system libraries in linker flags: -latomic    
+Android NDK:     This is likely to result in incorrect builds. Try using LOCAL_STATIC_LIBRARIES    
+Android NDK:     or LOCAL_SHARED_LIBRARIES instead to list the library dependencies of the    
+Android NDK:     current module    
+[armeabi-v7a] Compile++ thumb: va++ <= VAJni.cpp
+[armeabi-v7a] Compile++ thumb: va++ <= IOUniformer.cpp
+
+C++ build system [build] failed while executing:
+    /usr/local/lib/android/sdk/ndk/23.1.7779620/ndk-build \
+      NDK_PROJECT_PATH=null \
+      APP_BUILD_SCRIPT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk \
+      NDK_APPLICATION_MK=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Application.mk \
+      APP_ABI=armeabi-v7a \
+      NDK_ALL_ABIS=armeabi-v7a \
+      NDK_DEBUG=0 \
+      APP_PLATFORM=android-21 \
+      NDK_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj \
+      NDK_LIBS_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/lib \
+      va++
+  from /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib
+/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/IOUniformer.cpp:131:23: error: use of undeclared identifier '__NR_newfstatat'
+    int ret = syscall(__NR_newfstatat, dirfd, redirect_path, buf, flags);
+                      ^
+1 error generated.
+make: *** [/usr/local/lib/android/sdk/ndk/23.1.7779620/build/core/build-binary.mk:478: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj/local/armeabi-v7a/objs/va++/Foundation/IOUniformer.o] Error 1
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:68)
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:41)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:128)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:236)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:68)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:221)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:204)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:187)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:165)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:89)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:40)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:53)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:50)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
@@ -198,14 +207,46 @@ Caused by: org.gradle.api.internal.artifacts.ivyservice.DefaultLenientConfigurat
 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.internal.execution.steps.BuildOperationStep.operation(BuildOperationStep.java:34)
-	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.captureExecutionState(CaptureStateBeforeExecutionStep.java:130)
-	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.lambda$execute$0(CaptureStateBeforeExecutionStep.java:75)
-	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:75)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:50)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:40)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:68)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:38)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:41)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:74)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.CreateOutputsStep.execute(CreateOutputsStep.java:51)
+	at org.gradle.internal.execution.steps.CreateOutputsStep.execute(CreateOutputsStep.java:29)
+	at org.gradle.internal.execution.steps.CaptureStateAfterExecutionStep.executeDelegateBroadcastingChanges(CaptureStateAfterExecutionStep.java:124)
+	at org.gradle.internal.execution.steps.CaptureStateAfterExecutionStep.execute(CaptureStateAfterExecutionStep.java:80)
+	at org.gradle.internal.execution.steps.CaptureStateAfterExecutionStep.execute(CaptureStateAfterExecutionStep.java:58)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:48)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:36)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:181)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:71)
+	at org.gradle.internal.Either$Right.fold(Either.java:175)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:59)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:69)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:47)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:25)
+	at org.gradle.internal.execution.steps.RecordOutputsStep.execute(RecordOutputsStep.java:36)
+	at org.gradle.internal.execution.steps.RecordOutputsStep.execute(RecordOutputsStep.java:22)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:110)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:56)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:56)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:38)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:73)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:44)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveCachingStateStep.execute(ResolveCachingStateStep.java:89)
+	at org.gradle.internal.execution.steps.ResolveCachingStateStep.execute(ResolveCachingStateStep.java:50)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:102)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:57)
+	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:76)
 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:50)
 	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.executeWithNoEmptySources(SkipEmptyWorkStep.java:254)
-	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.executeWithNoEmptySources(SkipEmptyWorkStep.java:209)
-	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:88)
+	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:91)
 	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:56)
 	at org.gradle.internal.execution.steps.RemoveUntrackedExecutionStateStep.execute(RemoveUntrackedExecutionStateStep.java:32)
 	at org.gradle.internal.execution.steps.RemoveUntrackedExecutionStateStep.execute(RemoveUntrackedExecutionStateStep.java:21)
@@ -248,51 +289,66 @@ Caused by: org.gradle.api.internal.artifacts.ivyservice.DefaultLenientConfigurat
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:288)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:462)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:379)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:115)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:135)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:120)
-	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
-	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$6(DefaultBuildLifecycleController.java:167)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:247)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$7(StateTransitionController.java:174)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:174)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:167)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:190)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:249)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:109)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:172)
-	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:47)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:191)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:49)
-Cause 1: org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find me.weishu.exposed:exposed-core:0.8.1.
-Required by:
-    project :lib
-Cause 2: org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find me.weishu:free_reflection:3.0.1.
-Required by:
-    project :lib
-Cause 3: org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find me.weishu:epic:0.11.1.
-Required by:
-    project :lib
-Cause 4: org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find me.weishu.exposed:exposed-xposedapi:0.4.6.
-Required by:
-    project :lib
+Caused by: com.android.ide.common.process.ProcessException: Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/fb/Android.mk:fb: LOCAL_LDLIBS is always ignored for static libraries    
+Android NDK: WARNING:/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk:va++: non-system libraries in linker flags: -latomic    
+Android NDK:     This is likely to result in incorrect builds. Try using LOCAL_STATIC_LIBRARIES    
+Android NDK:     or LOCAL_SHARED_LIBRARIES instead to list the library dependencies of the    
+Android NDK:     current module    
+[armeabi-v7a] Compile++ thumb: va++ <= VAJni.cpp
+[armeabi-v7a] Compile++ thumb: va++ <= IOUniformer.cpp
+
+C++ build system [build] failed while executing:
+    /usr/local/lib/android/sdk/ndk/23.1.7779620/ndk-build \
+      NDK_PROJECT_PATH=null \
+      APP_BUILD_SCRIPT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk \
+      NDK_APPLICATION_MK=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Application.mk \
+      APP_ABI=armeabi-v7a \
+      NDK_ALL_ABIS=armeabi-v7a \
+      NDK_DEBUG=0 \
+      APP_PLATFORM=android-21 \
+      NDK_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj \
+      NDK_LIBS_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/lib \
+      va++
+  from /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib
+/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Foundation/IOUniformer.cpp:131:23: error: use of undeclared identifier '__NR_newfstatat'
+    int ret = syscall(__NR_newfstatat, dirfd, redirect_path, buf, flags);
+                      ^
+1 error generated.
+make: *** [/usr/local/lib/android/sdk/ndk/23.1.7779620/build/core/build-binary.mk:478: /home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj/local/armeabi-v7a/objs/va++/Foundation/IOUniformer.o] Error 1
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:274)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:106)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:104)
+	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:32)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:104)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:84)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.executeProcessBatch(CxxRegularBuilder.kt:331)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.build(CxxRegularBuilder.kt:128)
+	at com.android.build.gradle.tasks.ExternalNativeBuildTask$doTaskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:70)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.tasks.ExternalNativeBuildTask.doTaskAction(ExternalNativeBuildTask.kt:140)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:65)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	... 112 more
+Caused by: com.android.ide.common.process.ProcessException: Error while executing process /usr/local/lib/android/sdk/ndk/23.1.7779620/ndk-build with arguments {NDK_PROJECT_PATH=null APP_BUILD_SCRIPT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Android.mk NDK_APPLICATION_MK=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/src/main/jni/Application.mk APP_ABI=armeabi-v7a NDK_ALL_ABIS=armeabi-v7a NDK_DEBUG=0 APP_PLATFORM=android-21 NDK_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/obj NDK_LIBS_OUT=/home/runner/work/SIMOProjectVx/SIMOProjectVx/lib/build/intermediates/cxx/Release/4r6v1i32/lib va++}
+	at com.android.build.gradle.internal.process.GradleProcessResult.buildProcessException(GradleProcessResult.java:73)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:48)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:269)
+	... 129 more
+Caused by: org.gradle.process.internal.ExecException: Process 'command '/usr/local/lib/android/sdk/ndk/23.1.7779620/ndk-build'' finished with non-zero exit value 2
+	at org.gradle.process.internal.DefaultExecHandle$ExecResultImpl.assertNormalExitValue(DefaultExecHandle.java:415)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:46)
+	... 130 more
 
 
 * Get more help at https://help.gradle.org
 
-BUILD FAILED in 1m 49s
-13 actionable tasks: 12 executed, 1 from cache
+BUILD FAILED in 1m 57s
+6 actionable tasks: 6 executed
+Process completed with exit code 1.

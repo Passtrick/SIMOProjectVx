@@ -37,7 +37,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     
-    // Updated 3rd party libraries
     implementation 'com.github.systembugtj:switchbutton:1.4.5'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
     implementation 'com.github.medyo:android-about-page:1.2.2'
