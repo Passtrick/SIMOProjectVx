@@ -50,6 +50,4 @@ dependencies {
     implementation "me.weishu.exposed:exposed-xposedapi:0.4.6"
 }
 
-repositories {
-    maven { url 'https://jitpack.io' }
 }
